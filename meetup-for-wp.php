@@ -6,7 +6,6 @@
  * Author: NMGNtech
  * Author URI: http://www.NMGNtech.nl
  * Plugin URI: -
- * GitHub Plugin URI: https://github.com/NMGNtech/Meetup-For-WordPress
  * Text Domain: meetup-for-wp
  * Domain Path: /languages
  * @package Meetup-for-wp

@@ -4,8 +4,16 @@ use NMGNtech\Exceptions\MeetupGroupNotSetException;
 use NMGNtech\Exceptions\MeetupKeyNotSetException;
 use NMGNtech\Meetup;
 
+/**
+ * Class Frontend
+ *
+ * @package NMGNtech\Frontend
+ */
 class Frontend {
 
+	/**
+	 * Frontend constructor.
+	 */
 	public function __construct() {
 
 		try {
@@ -17,10 +25,20 @@ class Frontend {
 		}
 	}
 
+	/**
+	 * Initializes the front-end.
+	 *
+	 * @return void
+	 */
 	public function init() {
 		$this->add_shortcodes();
 	}
 
+	/**
+	 * Retrieves the next event's description if there's a cached version of it.
+	 *
+	 * @return string The next event's description. Empty string if no data is available.
+	 */
 	public function next_event_description() {
 		if ( $this->is_cached_event_available() ) {
 			return $this->get_cached_event()['description'];
@@ -29,6 +47,11 @@ class Frontend {
 		return '';
 	}
 
+	/**
+	 * Retrieves the next event's venue if there's a cached version of it.
+	 *
+	 * @return array The venue.
+	 */
 	public function get_venue() {
 		return $this->get_cached_event()['venue'];
 	}
@@ -36,7 +59,7 @@ class Frontend {
 	/**
 	 * Get the address for the next event.
 	 *
-	 * @return string
+	 * @return string The venue's address.
 	 */
 	public function next_event_address() {
 		$venue = $this->get_venue();
