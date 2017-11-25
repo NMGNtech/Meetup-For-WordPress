@@ -6,6 +6,7 @@
  * Author: NMGNtech
  * Author URI: http://www.NMGNtech.nl
  * Plugin URI: -
+ * GitHub Plugin URI: https://github.com/NMGNtech/Meetup-For-WordPress
  * Text Domain: meetup-for-wp
  * Domain Path: /languages
  * @package Meetup-for-wp
@@ -20,6 +21,7 @@ require __DIR__ . '/vendor/autoload.php';
  * - Shortcode support
  * - Map toggle
  * - Map styling etc
+ * - Travis build
  */
 class MeetupForWP {
 
