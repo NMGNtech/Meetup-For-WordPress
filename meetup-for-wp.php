@@ -6,6 +6,7 @@
  * Author: NMGNtech
  * Author URI: http://www.NMGNtech.nl
  * Plugin URI: -
+ * GitHub Plugin URI: https://github.com/NMGNtech/Meetup-For-WordPress
  * Text Domain: meetup-for-wp
  * Domain Path: /languages
  * @package Meetup-for-wp
@@ -20,7 +21,7 @@ require __DIR__ . '/vendor/autoload.php';
  * - Shortcode support
  * - Map toggle
  * - Map styling etc
- * - Travis build
+ *  - Widget
  */
 class MeetupForWP {
 
@@ -53,6 +54,8 @@ class MeetupForWP {
 		if ( ! is_admin() ) {
 			add_action( 'plugins_loaded', [ $this, 'init_frontend' ] );
 		}
+
+		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 	}
 
 	/**
@@ -74,6 +77,15 @@ class MeetupForWP {
 	}
 
 	/**
+	 * Registers the widgets with WordPress.
+	 *
+	 * @return void
+	 */
+	public function register_widgets() {
+		register_widget( 'NMGNtech\Widgets\NextEventWidget' );
+	}
+
+	/**
 	 * Retrieves the next event's information.
 	 *
 	 * @return array Information about the next event.
@@ -83,6 +95,7 @@ class MeetupForWP {
 	}
 }
 
+// Create a new instance.
 new MeetupForWP();
 
 

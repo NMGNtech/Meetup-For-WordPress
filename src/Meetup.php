@@ -6,9 +6,11 @@ use NMGNtech\Exceptions\MeetupKeyNotSetException;
 
 /**
  * Class Meetup
+ *
  * @package NMGNtech\Services
  */
 class Meetup {
+
 	/**
 	 * @var string
 	 */
@@ -24,6 +26,15 @@ class Meetup {
 	 */
 	protected $client;
 
+	/**
+	 * Meetup constructor.
+	 *
+	 * @param string $key The Meetup API key.
+	 * @param string $group The Meetup group name.
+	 *
+	 * @throws MeetupGroupNotSetException
+	 * @throws MeetupKeyNotSetException
+	 */
 	public function __construct($key = '', $group = '') {
 		if ( $key === '' ) {
 			throw new MeetupKeyNotSetException;
@@ -40,7 +51,9 @@ class Meetup {
 	}
 
 	/**
-	 * Setups the Meetup client
+	 * Setups the Meetup client.
+	 *
+	 * @return void
 	 */
 	private function setupClient() {
 		$this->client = MeetupKeyAuthClient::factory( [
@@ -48,6 +61,13 @@ class Meetup {
 		] );
 	}
 
+	/**
+	 * Retrieves all the events for the set group.
+	 *
+	 * @param string $fields The fields that need to be retrieved.
+	 *
+	 * @return \DMS\Service\Meetup\Response\MultiResultResponse The Meetup API response.
+	 */
 	public function events($fields = '') {
 		return $this->client->getGroup([
 				'urlname' => $this->group,
@@ -55,6 +75,11 @@ class Meetup {
 			]);
 	}
 
+	/**
+	 * Retrieves the next event for the set group.
+	 *
+	 * @return array The next event's information.
+	 */
 	public function nextEvent() {
 		$events = $this->client->getGroupEvents([
 			'urlname' => $this->group,
@@ -64,6 +89,13 @@ class Meetup {
 		return $events[0];
 	}
 
+	/**
+	 * Retrieves the RSVPs for a particular event.
+	 *
+	 * @param array $event The event to retrieve the RSVPs for.
+	 *
+	 * @return array The RSVPs or unknown if there's no RSVP limit.
+	 */
 	public function get_rsvps( $event ) {
 		if ( ! array_key_exists( 'rsvp_limit', $event ) ) {
 			return [
@@ -78,6 +110,13 @@ class Meetup {
 		];
 	}
 
+	/**
+	 * Retrieves an event by it's ID.
+	 *
+	 * @param string $id The event's ID.
+	 *
+	 * @return array The event.
+	 */
 	public function event( $id ) {
 		return $this->client->getEvent( [ 'id' => $id ] );
 	}
