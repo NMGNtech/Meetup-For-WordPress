@@ -25,9 +25,20 @@ class MeetupForWP {
 
 	/** @var \NMGNtech\Meetup */
 	private $instance;
+
+	/**
+	 * @var \NMGNtech\Frontend\Frontend
+	 */
 	private $frontend;
+
+	/**
+	 * @var \NMGNtech\Admin\Admin
+	 */
 	private $admin;
 
+	/**
+	 * MeetupForWP constructor.
+	 */
 	public function __construct() {
 
 		if ( ! defined( 'MWP_PREFIX' ) ) {
@@ -43,14 +54,29 @@ class MeetupForWP {
 		}
 	}
 
+	/**
+	 * Initializes the front-end.
+	 *
+	 * @return void
+	 */
 	public function init_frontend() {
 		$this->frontend = new NMGNtech\Frontend\Frontend();
 	}
 
+	/**
+	 * Initializes the backend.
+	 *
+	 * @return void
+	 */
 	public function init_backend() {
 		$this->admin = new NMGNtech\Admin\Admin();
 	}
 
+	/**
+	 * Retrieves the next event's information.
+	 *
+	 * @return array Information about the next event.
+	 */
 	public function next_event() {
 		return $this->instance->event( $this->instance->nextEvent() );
 	}
