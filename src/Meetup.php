@@ -90,6 +90,20 @@ class Meetup {
 	}
 
 	/**
+	 * Retrieves a list of next events for the set group.
+	 *
+	 * @return array The next event's information.
+	 */
+	public function nextEvents() {
+		$events = $this->client->getGroupEvents([
+			'urlname' => $this->group,
+			'scroll' => 'next_upcoming',
+		]);
+
+		return $events->getData();
+	}
+
+	/**
 	 * Retrieves the RSVPs for a particular event.
 	 *
 	 * @param array $event The event to retrieve the RSVPs for.

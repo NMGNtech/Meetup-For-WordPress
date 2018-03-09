@@ -1,27 +1,22 @@
 <?php
 /**
- * Plugin Name: Meetup-for-wp
- * Version: 0.1-alpha
- * Description: PLUGIN DESCRIPTION HERE
- * Author: NMGNtech
- * Author URI: http://www.NMGNtech.nl
+ * Plugin Name: Meetup for WordPress
+ * Version: 0.1
+ * Description: A plugin that makes it possible to easily integrate the Meetup API into your website.
+ * Author: NMGN.tech
+ * Author URI: https://www.NMGN.tech
  * Plugin URI: -
  * GitHub Plugin URI: https://github.com/NMGNtech/Meetup-For-WordPress
  * Text Domain: meetup-for-wp
  * Domain Path: /languages
+ *
  * @package Meetup-for-wp
  */
 
 require __DIR__ . '/vendor/autoload.php';
 
 /**
- * TODO
- * - Meetup API key input
- * - Additional fields input
- * - Shortcode support
- * - Map toggle
- * - Map styling etc
- *  - Widget
+ * Class MeetupForWP.
  */
 class MeetupForWP {
 
@@ -55,7 +50,7 @@ class MeetupForWP {
 			add_action( 'plugins_loaded', [ $this, 'init_frontend' ] );
 		}
 
-		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+		add_action( 'widgets_init', [ $this, 'register_widgets' ] );
 	}
 
 	/**
@@ -97,5 +92,3 @@ class MeetupForWP {
 
 // Create a new instance.
 new MeetupForWP();
-
-

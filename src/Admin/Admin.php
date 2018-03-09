@@ -52,8 +52,10 @@ class Admin {
 
 		// Set the transient
 		$next_event = $meetup->nextEvent();
+		$next_events = $meetup->nextEvents();
 
 		set_transient( 'mwp_next_event', $next_event, HOUR_IN_SENCONDS );
+		set_transient( 'mwp_next_events', $next_events, HOUR_IN_SENCONDS );
 
 		wp_redirect( admin_url( 'admin.php?page=NMGNtech-mwp' ) );
 	}

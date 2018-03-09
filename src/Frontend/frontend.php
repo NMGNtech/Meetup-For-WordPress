@@ -88,6 +88,17 @@ class Frontend {
 	}
 
 	/**
+	 * Displays the cached event's name.
+	 *
+	 * @return void
+	 */
+	public function next_events() {
+		foreach ( $this->get_cached_events() as $cached_event ) {
+			echo $cached_event['name'] . "\n";
+		}
+	}
+
+	/**
 	 * Adds shortcodes to be used in pages and post.
 	 *
 	 * @return void
@@ -96,6 +107,7 @@ class Frontend {
 		add_shortcode( 'meetup_wp_next_event', [ $this, 'next_event_description' ] );
 		add_shortcode( 'meetup_wp_next_event_address', [ $this, 'next_event_address' ] );
 		add_shortcode( 'meetup_wp_next_event_map', [ $this, 'next_event_map' ] );
+		add_shortcode( 'meetup_wp_next_events', [ $this, 'next_events' ] );
 	}
 
 	/**
@@ -108,12 +120,30 @@ class Frontend {
 	}
 
 	/**
+	 * Determines whether or not events were cached.
+	 *
+	 * @return bool Whether or not cached events are available.
+	 */
+	protected function are_cached_events_available() {
+		return get_transient( 'mwp_next_events' ) !== false;
+	}
+
+	/**
 	 * Gets the cached event from the transient (if present).
 	 *
 	 * @return array The cached event.
 	 */
 	protected function get_cached_event() {
-		return get_transient( 'mwp_next_event' );
+		return get_transient( 'mwp_next_events' )[0];
+	}
+
+	/**
+	 * Gets the cached events from the transient (if present).
+	 *
+	 * @return array The cached event.
+	 */
+	protected function get_cached_events() {
+		return get_transient( 'mwp_next_events' );
 	}
 }
 
