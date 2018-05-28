@@ -35,12 +35,12 @@ class Meetup {
 	 * @throws MeetupGroupNotSetException
 	 * @throws MeetupKeyNotSetException
 	 */
-	public function __construct($key = '', $group = '') {
+	public function __construct( $key = '', $group = '' ) {
 		if ( $key === '' ) {
 			throw new MeetupKeyNotSetException;
 		}
 
-		if ($group === '') {
+		if ( $group === '' ) {
 			throw new MeetupGroupNotSetException;
 		}
 
@@ -68,11 +68,11 @@ class Meetup {
 	 *
 	 * @return \DMS\Service\Meetup\Response\MultiResultResponse The Meetup API response.
 	 */
-	public function events($fields = '') {
-		return $this->client->getGroup([
-				'urlname' => $this->group,
-			    'fields' => $fields
-			]);
+	public function events( $fields = '' ) {
+		return $this->client->getGroup( [
+			'urlname' => $this->group,
+		    'fields' => $fields
+		] );
 	}
 
 	/**
@@ -81,10 +81,10 @@ class Meetup {
 	 * @return array The next event's information.
 	 */
 	public function nextEvent() {
-		$events = $this->client->getGroupEvents([
+		$events = $this->client->getGroupEvents( [
 			'urlname' => $this->group,
 			'scroll' => 'next_upcoming',
-		]);
+		] );
 
 		return $events[0];
 	}
@@ -95,10 +95,10 @@ class Meetup {
 	 * @return array The next event's information.
 	 */
 	public function nextEvents() {
-		$events = $this->client->getGroupEvents([
+		$events = $this->client->getGroupEvents( [
 			'urlname' => $this->group,
 			'scroll' => 'next_upcoming',
-		]);
+		] );
 
 		return $events->getData();
 	}
@@ -133,5 +133,18 @@ class Meetup {
 	 */
 	public function event( $id ) {
 		return $this->client->getEvent( [ 'id' => $id ] );
+	}
+
+	/**
+	 * Retrieves photos from the meetup group.
+	 *
+	 * @return \DMS\Service\Meetup\Response\MultiResultResponse The meetup group's photos.
+	 */
+	public function photos() {
+		$photos = $this->client->getPhotos( [
+			'group_urlname' => $this->group,
+		] );
+
+		return $photos;
 	}
 }

@@ -44,8 +44,11 @@ class Admin {
 
 	/**
 	 * Fetches data from the Meetup API and saves it in a transient for the next hour.
+	 *
+	 * @throws \NMGNtech\Exceptions\MeetupGroupNotSetException
+	 * @throws \NMGNtech\Exceptions\MeetupKeyNotSetException
      *
-     * @return void
+	 * @return void
 	 */
 	public function fetch_data() {
 		$meetup = new Meetup( $this->mwp_option( 'api-key' ), $this->mwp_option( 'meetup-group' ) );
