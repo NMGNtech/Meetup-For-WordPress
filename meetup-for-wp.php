@@ -15,6 +15,9 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use NMGNtech\Frontend\Frontend;
+use NMGNtech\Admin\Admin;
+
 /**
  * Class MeetupForWP.
  */
@@ -59,7 +62,7 @@ class MeetupForWP {
 	 * @return void
 	 */
 	public function init_frontend() {
-		$this->frontend = new NMGNtech\Frontend\Frontend();
+		$this->frontend = new Frontend();
 	}
 
 	/**
@@ -68,7 +71,7 @@ class MeetupForWP {
 	 * @return void
 	 */
 	public function init_backend() {
-		$this->admin = new NMGNtech\Admin\Admin();
+		$this->admin = new Admin();
 	}
 
 	/**
